@@ -1,0 +1,17 @@
+<phpunit
+	bootstrap="tests/includes/bootstrap.php"
+        backupGlobals="false"
+        colors="true"
+        >
+    <testsuites>
+        <testsuite>
+            <directory suffix=".php">tests</directory>
+        </testsuite>
+    </testsuites>
+	<filter>
+	  <whitelist>
+        <directory suffix=".php">api</directory>
+        <file>thermal-api.php</file>
+	  </whitelist>	
+	</filter>
+</phpunit>
