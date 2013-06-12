@@ -31,6 +31,7 @@ The following resources are available
 * [Terms](#terms)
 * [Rewrite Rules](#rewrite_rules)
 * [Media Items](#media_items)
+* [Comments](#comments)
 
 
 ## Posts
@@ -108,13 +109,13 @@ Examples:
 			<td>Second (from 0 to 59)</td>
 		</tr>
 		<tr>
-			<td>before* </td>
+			<td>before</td>
 			<td>string</td>
 			<td>A parsable formatted date string.  Unless specified in the format used, 
 			the result will be relative to the timezone of the site.</td>
 		</tr>
 		<tr>
-			<td>after* </td>
+			<td>after</td>
 			<td>string</td>
 			<td>A parsable formatted date string.  Unless specified in the format used, 
 			the result will be relative to the timezone of the site.</td>
@@ -145,7 +146,7 @@ Examples:
 			<td class="shade" colspan="3">Taxonomy Filters</td>
 		</tr>
 		<tr>
-			<td>cat**</td>
+			<td>cat</td>
 			<td>array|integer</td>
 			<td>The term_id of the category to include.  An array of IDs will also be accepted.</td>
 		</tr>
@@ -160,7 +161,7 @@ Examples:
 			<td>The slug of a single tag</td>
 		</tr>
 		<tr>
-			<td>taxonomy*</td>
+			<td>taxonomy</td>
 			<td>associative array</td>
 			<td>An associative array where the key is the name of the taxonomy and the value is 
 			an array of term IDs.  Post that exist in any of the terms will be included in the
@@ -177,7 +178,7 @@ Examples:
 			</td>
 		</tr>
 		<tr>
-			<td>per_page*</td>
+			<td>per_page</td>
 			<td>integer</td>
 			<td>The maximum number of posts to return.  The value must range from 1 to 				MAX_POSTS_PER_PAGE.</td>
 		</tr>
@@ -190,7 +191,7 @@ Examples:
 			<td class="shade" colspan="3">Ordering Parameters</td>
 		</tr>
 		<tr>
-			<td>orderby**</td>
+			<td>orderby</td>
 			<td>array|string</td>
 			<td>Sort the results by the given identifier.  Defaults to 'date'.  Supported values are:
 				<ul>
@@ -225,7 +226,7 @@ Orderby will also accept an array of multiple identifiers.
 			<td>The user_nicename of the author.</td>
 		</tr>
 		<tr>
-			<td>author**</td>
+			<td>author</td>
 			<td>integer</td>
 			<td>The ID of the authors to include.  An array of IDs will also be accepted.  Negative
 			ID's can be used to denote exclusion.</td>
@@ -288,11 +289,16 @@ Orderby will also accept an array of multiple identifiers.
 			</td>
 		</tr>
 		<tr>
-			<td>include_found*</td>
+			<td>include_found</td>
 			<td>boolean</td>
 			<td>Defaut to false.  When true, the response will include a found rows count.  There is some
 			overhead in generating the total count so this should only be turned on when needed.  This is 
 			automatically turned on if the 'paged' filter is used.</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
 		</tr>
 	</tbody>
 </table>
@@ -314,6 +320,29 @@ Orderby will also accept an array of multiple identifiers.
 
 ##### Request
     GET {api root}/posts/{id}
+
+##### Parameters
+<table>
+	<thead>
+		<tr>
+			<th>Parameter</th>
+			<th>Data Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="shade" colspan="3">
+				Response Altering Parameters
+			</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
+		</tr>
+	</tbody>
+</table>
 
 ##### Post JSON Schema
 	{
@@ -422,7 +451,7 @@ Orderby will also accept an array of multiple identifiers.
                         		"type": "string",
                         		"required": false
                         	},
-                        	"include": {
+                        	"in": {
                         		"description": "An array of IDs to only show the images from these attachments."
                         		"type": "array",
                         		"required": false
@@ -615,7 +644,7 @@ Orderby will also accept an array of multiple identifiers.
 			</td>
 		</tr>
 		<tr>
-			<td>per_page*</td>
+			<td>per_page</td>
 			<td>integer</td>
 			<td>The maximum number of posts to return.  The value must range from 1 to 				MAX_USERS_PER_PAGE.</td>
 		</tr>
@@ -628,7 +657,7 @@ Orderby will also accept an array of multiple identifiers.
 			<td class="shade" colspan="3">Ordering Parameters</td>
 		</tr>
 		<tr>
-			<td>orderby**</td>
+			<td>orderby</td>
 			<td>string</td>
 			<td>Sort the results by the given identifier.  Defaults to 'display_name'.  Supported values are:
 				<ul>
@@ -647,7 +676,7 @@ Orderby will also accept an array of multiple identifiers.
 			<td class="shade" colspan="3">General Filters</td>
 		</tr>
 		<tr>
-			<td>include</td>
+			<td>in</td>
 			<td>array|integer</td>
 			<td>An array of user ID's to include.</td>
 		</tr>
@@ -657,11 +686,16 @@ Orderby will also accept an array of multiple identifiers.
 			</td>
 		</tr>
 		<tr>
-			<td>include_found*</td>
+			<td>include_found</td>
 			<td>boolean</td>
 			<td>Defaut to false.  When true, the response will include a found rows count.  There is some
 			overhead in generating the total count so this should only be turned on when needed.  This is 
 			automatically turned on if the 'paged' filter is used.</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
 		</tr>
 	</tbody>
 </table>
@@ -681,6 +715,29 @@ Orderby will also accept an array of multiple identifiers.
 
 ##### Request
     GET {api root}/users/{id}
+
+##### Parameters
+<table>
+	<thead>
+		<tr>
+			<th>Parameter</th>
+			<th>Data Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="shade" colspan="3">
+				Response Altering Parameters
+			</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
+		</tr>
+	</tbody>
+</table>
 
 ##### User JSON Schema
 	{
@@ -802,6 +859,16 @@ Orderby will also accept an array of multiple identifiers.
 			<td>array|string</td>
 			<td>An array of post_types to include taxonomies from.  Results will include any taxonomies with at least 1 of the given post_types included.</td>
 		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
+		</tr>
 	</tbody>
 </table>
 
@@ -819,7 +886,30 @@ Orderby will also accept an array of multiple identifiers.
 
 ##### Request
     GET {api root}/taxonomies/{name}
-    
+
+##### Parameters
+<table>
+	<thead>
+		<tr>
+			<th>Parameter</th>
+			<th>Data Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="shade" colspan="3">
+				Response Altering Parameters
+			</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
+		</tr>
+	</tbody>
+</table>
+
 ##### Taxonomy JSON Schema
 	{
         "id": "#taxonomy",
@@ -896,6 +986,7 @@ Orderby will also accept an array of multiple identifiers.
 
 ##### Request
     GET {api root}/taxonomies/{name}/terms
+    
 ##### Parameters
 
 <table>
@@ -911,14 +1002,14 @@ Orderby will also accept an array of multiple identifiers.
 			<td class="shade" colspan="3">Pagination Filters</td>
 		</tr>
 		<tr>
-			<td>paged*</td>
+			<td>paged</td>
 			<td>integer</td>
 			<td>A positive integer specifiying the page (or subset of results) to return.  This 				filter will automatically determine the offset to use based on the per_page
 				and paged. Using this filter will cause include_found to be true.
 			</td>
 		</tr>
 		<tr>
-			<td>per_page*</td>
+			<td>per_page</td>
 			<td>integer</td>
 			<td>The maximum number of posts to return.  The value must range from 1 to 				MAX_TERMS_PER_PAGE.</td>
 		</tr>
@@ -931,7 +1022,7 @@ Orderby will also accept an array of multiple identifiers.
 			<td class="shade" colspan="3">Ordering Parameters</td>
 		</tr>
 		<tr>
-			<td>orderby**</td>
+			<td>orderby</td>
 			<td>string</td>
 			<td>Sort the results by the given identifier.  Defaults to 'name'.  Supported values are:
 				<ul>
@@ -950,7 +1041,7 @@ Orderby will also accept an array of multiple identifiers.
 			<td class="shade" colspan="3">General Filters</td>
 		</tr>
 		<tr>
-			<td>include</td>
+			<td>in</td>
 			<td>array|integer</td>
 			<td>An array of term ID's to include.</td>
 		</tr>
@@ -980,11 +1071,16 @@ Orderby will also accept an array of multiple identifiers.
 			</td>
 		</tr>
 		<tr>
-			<td>include_found*</td>
+			<td>include_found</td>
 			<td>boolean</td>
 			<td>Defaut to false.  When true, the response will include a found rows count.  There is some
 			overhead in generating the total count so this should only be turned on when needed.  This is 
 			automatically turned on if the 'paged' filter is used.</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
 		</tr>
 	</tbody>
 </table>
@@ -1005,7 +1101,30 @@ Orderby will also accept an array of multiple identifiers.
 
 ##### Request
     GET {api root}/taxonomies/{name}/terms/{term_id}
-    
+
+##### Parameters
+<table>
+	<thead>
+		<tr>
+			<th>Parameter</th>
+			<th>Data Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="shade" colspan="3">
+				Response Altering Parameters
+			</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
+		</tr>
+	</tbody>
+</table>
+
 #### Term JSON Schema
 	{
         "type": "object",
@@ -1078,7 +1197,7 @@ Orderby will also accept an array of multiple identifiers.
 
 ##### Example Term Response
 	{
-		"ID": 123456,
+		"id": 123456,
 		"term_id_str": "123456",
 		"term_taxonomy_id": 123456789,
 		"term_taxonomy_id_str": "123456789",
@@ -1247,8 +1366,308 @@ Orderby will also accept an array of multiple identifiers.
     }
 
 
-##Notes
-	*    - This is a non-standard public_query_var.
-	**   - By default WordPress asks for this query_var to be passed in as a comma 
-			separated list.  This is replaced by an array in the API to better support 
-			x-www-form-urlencoded submissions.
+## Comments
+<span id="Comments"></span>A comment represents a user response to a post
+
+### Methods
+#### List
+
+##### Request
+    GET {api root}/comments
+
+    GET {api root}/posts/{#post_id}/comments
+##### Parameters
+
+<table>
+	<thead>
+		<tr>
+			<th>Parameter</th>
+			<th>Data Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="shade" colspan="3">
+			Date Filters
+			</td>
+		</tr>
+		<tr>
+			<td>before </td>
+			<td>string</td>
+			<td>A parsable formatted date string.  Unless specified in the format used, 
+			the result will be relative to the timezone of the site.</td>
+		</tr>
+		<tr>
+			<td>after </td>
+			<td>string</td>
+			<td>A parsable formatted date string.  Unless specified in the format used, 
+			the result will be relative to the timezone of the site.</td>
+		</tr>
+		<tr>
+			<td class="shade" colspan="3">Search Filtering</td>
+		</tr>
+		<tr>
+			<td>s</td>
+			<td>string</td>
+			<td>
+				Search keyword or string, by default this searches against the author, author email, author url, author ip, and content.
+				The search looks for a match to the entire search expression.
+			</td>
+		</tr>
+		<tr>
+			<td class="shade" colspan="3">Pagination Filters</td>
+		</tr>
+		<tr>
+			<td>paged</td>
+			<td>integer</td>
+			<td>A positive integer specifiying the page (or subset of results) to return.  This filter will automatically determine the offset to use based on the per_page
+				and paged arguments. Using this filter will cause include_found to be true.
+			</td>
+		</tr>
+		<tr>
+			<td>per_page</td>
+			<td>integer</td>
+			<td>The maximum number of posts to return.  The value must range from 1 to MAX_COMMENTS_PER_PAGE.</td>
+		</tr>
+		<tr>
+			<td>offset</td>
+			<td>integer</td>
+			<td>The number of posts to skip over before returning the result set.</td>
+		</tr>
+		<tr>
+			<td class="shade" colspan="3">Ordering Parameters</td>
+		</tr>
+		<tr>
+			<td>orderby</td>
+			<td>array|string</td>
+			<td>Sort the results by the given identifier.  Defaults to 'date'.  Supported values are:
+				<ul>
+					<li>'comment_date_gmt' - (Default) The GMT date of the post.</li>
+					<li>'comment_ID' - The ID of the post.</li>
+					<li>'comment_author' - The value of the author ID.</li>
+					<li>'comment_date' - The date of the comment..</li>
+					<li>'comment_type' - The type of comment.</li>
+					<li>'comment parent'- The ID of the comment's parent</li>
+					<li>'comment_post_ID' - The ID of the post which the comment belongs.</li>
+					<li>'user_id' - The ID of the user making the comments.</li>
+				</ul>
+
+Orderby will also accept an array of multiple identifiers.
+			</td>
+		</tr>
+		<tr>
+			<td>order</td>
+			<td>string</td>
+			<td>The order direction.  Options are 'ASC' and 'DESC'.  Default is 'DESC'</td>
+		</tr>
+		<tr>
+			<td class="shade" colspan="3">General Filters</td>
+		</tr>
+		<tr>
+			<td>in</td>
+			<td>integer|array</td>
+			<td>Array of Ids of comments to include.</td>
+		</tr>
+		<tr>
+			<td>parent</td>
+			<td>integer</td>
+			<td>ID of the parent comment to pull from.</td>
+		</tr>
+		<tr>
+			<td>post_id</td>
+			<td>integer</td>
+			<td>ID of post from which to pull comments.</td>
+		</tr>
+		<tr>
+			<td>post_name</td>
+			<td>string</td>
+			<td>Slug/Name of the post from which to pull comments.</td>
+		</tr>
+		<tr>
+			<td>type</td>
+			<td>string</td>
+			<td>The type of comments to return.  Default options: 'comment', 'pingback', 'trackback', 'pings' (returns trackbacks and pingbacks').</td>
+		</tr>
+		<tr>
+			<td>status</td>
+			<td>string</td>
+			<td>The status of comments to return.  Default: 'approved'.</td>
+		</tr>
+		<tr>
+			<td>user_id</td>
+			<td>int</td>
+			<td>User ID of commentor making the comments.</td>
+		</tr>
+		<tr>
+			<td class="shade" colspan="3">
+				Response Altering Parameters
+			</td>
+		</tr>
+		<tr>
+			<td>include_found</td>
+			<td>boolean</td>
+			<td>Defaut to false.  When true, the response will include a found rows count.  There is some
+			overhead in generating the total count so this should only be turned on when needed.  This is 
+			automatically turned on if the 'paged' filter is used.</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+##### Response
+	{
+		'found': 40, //only provided if include_found == true
+		"comments": [
+			[Comment Object],
+			….
+		]
+	}
+
+
+
+#### Single Entity
+
+##### Request
+    GET {api root}/comments/{id}
+
+##### Parameters
+<table>
+	<thead>
+		<tr>
+			<th>Parameter</th>
+			<th>Data Type</th>
+			<th>Description</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="shade" colspan="3">
+				Response Altering Parameters
+			</td>
+		</tr>
+		<tr>
+			<td>callback</td>
+			<td>string</td>
+			<td>When set, the response will be wrapped in a JSONP callback.</td>
+		</tr>
+	</tbody>
+</table>
+
+##### Comment JSON Schema
+	{
+        "title": "Comment Object",
+        "description": "A representation of a single post object",
+        "type": "object",
+        "id": "#comment",
+        "properties": {
+            "author": {
+                "description": "Display name of the author of the comment.",
+                "type": "string",
+                "required": true
+            }
+            "author_url": {
+                "description": "URL set for the author of the comment.",
+                "type": "string",
+                "required": false
+            }
+            "date": {
+                "description": "The comment's creation time in iso 8601 format.",
+                "type": "string",
+                "format": "date-time",
+                "required": true
+            },
+            "content": {
+                "description": "The raw comment content.",
+                "type": "string",
+                "required": true
+            },
+            "content_display": {
+                "description": "Display formatted content of the comment.",
+                "type": "string",
+                "required": true
+            },
+            "user": {
+                "description": "ID of the user making the comment",
+                "type": "integer",
+                "required": false
+            },
+						"user_id_str": {
+                "description": "String version of the ID of the user making the comment",
+                "type": "string",
+                "required": false
+            },
+            "id_str": {
+                "description": "The ID of the post represented as a string.",
+                "type": "string",
+                "required": true
+            },
+            "id": {
+                "description": "The ID of the post",
+                "type": "integer",
+                "minimum": 1,
+                "required": true
+            },
+            "type": {
+                "description": "The type of comment.  Deafult enum: 'comment', 'pingback', 'trackback'",
+                "type": "string",
+                "required": true
+            },
+            "media": {
+                "type": "array",
+                "required": false,
+                "items": {
+                    "type": {
+                        "$ref": "#mediaItem"
+                    }
+                }
+            },
+            "parent_str": {
+                "description": "The ID of the comment's parent as a string, if it has one.",
+                "type": "string",
+                "required": false
+            },
+            "parent": {
+                "description": "The ID of the comment's parent as a string, if it has one.",
+                "type": "integer",
+                "required": false
+            },
+            "status": {
+                "description": "The status of the comment.",
+                "type": {
+                    "enum": ["approve", "pending", "spam", "trash"]
+                },
+                "required": true
+            }
+        }
+    }
+	
+##### Example Comment Response
+    {
+        "id": 597,
+        "id_str": "597",
+        "type": "comment",
+        "author": "John Doe",
+        "author_url": "http://example.org",
+        "parent": 0,
+        "parent_str": "0",
+        "date": "2013-06-11T18:39:46+00:00",
+        "content": "This is my comment text",
+        "status": "approve",
+        "user": 1,
+        "user_id_str": "1",
+        "content_display": "<p>This is my comment text<\/p>\n",
+        "avatar": [
+            {
+                "url": "http:\/\/1.gravatar.com\/avatar\/96614ec98aa0c0d2ee75796dced6df54?s=96&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D96&amp;r=G",
+                "width": 96,
+                "height": 96
+            }
+        ]
+    }
